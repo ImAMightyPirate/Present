@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Wrap</name>
+    </assembly>
+    <members>
+        <member name="T:Wrap.Program">
+            <summary>
+            Entry point for the Wrap program. The wrap program is a CLI interface
+            for Present's code generation utilties.
+            </summary>
+        </member>
+        <member name="P:Wrap.Program.Type">
+            <summary>
+            Gets the .NET type to be wrapped.
+            </summary>
+        </member>
+        <member name="P:Wrap.Program.Output">
+            <summary>
+            Gets the path where the wrapper class code file should be output.
+            </summary>
+        </member>
+        <member name="P:Wrap.Program.Verbose">
+            <summary>
+            Gets a value indicating whether verbose logging is enabled.
+            </summary>
+        </member>
+        <member name="P:Wrap.Program.Quiet">
+            <summary>
+            Gets a value indicating whether quiet logging is enabled (i.e. logging is turned off).
+            </summary>
+        </member>
+        <member name="M:Wrap.Program.Main(System.String[])">
+            <summary>
+            Initial method called when the program is started. This is routed to
+            the CommandLineUtils NuGet package to parse the command line arguments,
+            which then subsequently runs the <see cref="M:Wrap.Program.OnExecute"/> method.
+            </summary>
+            <param name="args">The command line arguments supplied to the program.</param>
+        </member>
+    </members>
+</doc>
