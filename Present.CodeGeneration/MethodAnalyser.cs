@@ -66,6 +66,12 @@
 
         private bool IsSupportedType(Type type)
         {
+            // If an array then check the type of the element
+            if (type.IsArray)
+            {
+                return this.IsSupportedType(type.GetElementType());
+            }
+
             // All value types are supported (which also includes the void return type)
             if (type.IsValueType)
             {
