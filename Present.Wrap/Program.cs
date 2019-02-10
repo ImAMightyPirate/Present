@@ -93,10 +93,15 @@
                 levelSwitch.MinimumLevel = LogEventLevel.Debug;
             }
 
+            var defaultLogPath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "Present",
+                "Wrap.log");
+
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.ControlledBy(levelSwitch)
                 .WriteTo.Console()
-                .WriteTo.File("log.txt")
+                .WriteTo.File(defaultLogPath)
                 .CreateLogger();
         }
     }
