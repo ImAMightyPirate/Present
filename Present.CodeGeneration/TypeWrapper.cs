@@ -57,13 +57,19 @@
 
             var supportedMethods = new List<MethodInfo>();
 
+            var totalMethodCount = 0;
+
             foreach (var method in type.GetMethods())
             {
                 if (this.methodAnalyser.IsWrappingSupported(method))
                 {
                     supportedMethods.Add(method);
                 }
+
+                totalMethodCount++;
             }
+
+            this.logger.Debug($"{supportedMethods.Count} of {totalMethodCount} methods for type '{type}.Name' are supported.");
 
             var namespaceDeclaration = this.namespaceCodeGenerator.Generate(
                 type.Namespace,
