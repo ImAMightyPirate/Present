@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\Repos\Present\Wrap\Wrap.xml</DocumentationFile>
+    <DocumentationFile>D:\Repos\Present\Present.Wrap\Wrap.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
