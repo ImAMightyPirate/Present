@@ -32,7 +32,7 @@
         /// <param name="outputPath">The output path for the file.</param>
         public void WriteCodeFileToPath(
             string typeName,
-            NamespaceDeclarationSyntax namespaceDeclaration, 
+            NamespaceDeclarationSyntax namespaceDeclaration,
             string outputPath)
         {
             Ensure.That(namespaceDeclaration).IsNotNull();

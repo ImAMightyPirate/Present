@@ -15,7 +15,7 @@
         /// <param name="outputPath">The output path for the file.</param>
         void WriteCodeFileToPath(
             string typeName,
-            NamespaceDeclarationSyntax namespaceDeclaration, 
+            NamespaceDeclarationSyntax namespaceDeclaration,
             string outputPath);
     }
 }
