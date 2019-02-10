@@ -19,7 +19,7 @@
         /// </summary>
         /// <param name="method">The method.</param>
         /// <returns>The generated method declaration and method body.</returns>
-        public(MethodDeclarationSyntax methodDeclaration, BlockSyntax methodBody) Generate(MethodInfo method)
+        public (MethodDeclarationSyntax methodDeclaration, BlockSyntax methodBody) Generate(MethodInfo method)
         {
             Ensure.That(method).IsNotNull();
 

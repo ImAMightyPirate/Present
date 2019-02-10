@@ -64,7 +64,7 @@
             // Run generation for each method
             foreach (var method in methods)
             {
-                var(methodDeclaration, methodBody) = this.methodCodeGenerator.Generate(method);
+                var (methodDeclaration, methodBody) = this.methodCodeGenerator.Generate(method);
 
                 // Add method declaration to interface declaration
                 var interfaceMethodDeclaration = methodDeclaration
