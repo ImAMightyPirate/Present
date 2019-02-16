@@ -1,6 +1,7 @@
 ﻿namespace Present.CodeGeneration
 {
     using System.IO;
+    using System.Text;
     using Constants;
     using Contracts;
     using EnsureThat;
@@ -48,7 +49,7 @@
 
             this.logger.Debug($"Writing code file to path '{filePath}'");
 
-            File.WriteAllText(filePath, generatedCode);
+            File.WriteAllText(filePath, generatedCode, Encoding.UTF8);
         }
     }
 }
