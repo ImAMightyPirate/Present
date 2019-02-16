@@ -68,14 +68,24 @@
             Namespace constants.
             </summary>
         </member>
-        <member name="F:Present.CodeGeneration.Constants.Namespace.System">
+        <member name="F:Present.CodeGeneration.Constants.Namespace.CodeAnalysis">
             <summary>
-            The System namespace.
+            The Code Analysis namespace.
+            </summary>
+        </member>
+        <member name="F:Present.CodeGeneration.Constants.Namespace.Diagnostics">
+            <summary>
+            The Diagnostics namespace.
             </summary>
         </member>
         <member name="F:Present.CodeGeneration.Constants.Namespace.Present">
             <summary>
             The Present namespace.
+            </summary>
+        </member>
+        <member name="F:Present.CodeGeneration.Constants.Namespace.System">
+            <summary>
+            The System namespace.
             </summary>
         </member>
         <member name="T:Present.CodeGeneration.Constants.XmlElementIdentifier">
