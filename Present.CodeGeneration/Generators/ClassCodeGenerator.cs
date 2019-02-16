@@ -25,7 +25,7 @@
             return SyntaxFactory
                 .ClassDeclaration(typeName)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.SealedKeyword))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PartialKeyword))
                 .AddBaseListTypes(SyntaxFactory.SimpleBaseType(SyntaxFactory.IdentifierName(interfaceName)));
         }
     }
