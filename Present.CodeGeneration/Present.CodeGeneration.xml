@@ -23,6 +23,16 @@
             <param name="namespaceDeclaration">The namespace declaration.</param>
             <param name="outputPath">The output path for the file.</param>
         </member>
+        <member name="T:Present.CodeGeneration.Constants.Comment">
+            <summary>
+            Comment constants.
+            </summary>
+        </member>
+        <member name="F:Present.CodeGeneration.Constants.Comment.SingleLineDocumentationPrefix">
+            <summary>
+            The single line documentation prefix.
+            </summary>
+        </member>
         <member name="T:Present.CodeGeneration.Constants.FileExtension">
             <summary>
             File extension constants.
@@ -68,6 +78,16 @@
             The Present namespace.
             </summary>
         </member>
+        <member name="T:Present.CodeGeneration.Constants.XmlElementIdentifier">
+            <summary>
+            XML element identifier constants.
+            </summary>
+        </member>
+        <member name="F:Present.CodeGeneration.Constants.XmlElementIdentifier.Copyright">
+            <summary>
+            The copyright identifier.
+            </summary>
+        </member>
         <member name="T:Present.CodeGeneration.Contracts.IClassCodeGenerator">
             <summary>
             Contract for the class code generator.
@@ -93,6 +113,17 @@
             <param name="typeName">The type name.</param>
             <param name="namespaceDeclaration">The namespace declaration.</param>
             <param name="outputPath">The output path for the file.</param>
+        </member>
+        <member name="T:Present.CodeGeneration.Contracts.ICopyrightXmlGenerator">
+            <summary>
+            Contract for the copyright XML generator.
+            </summary>
+        </member>
+        <member name="M:Present.CodeGeneration.Contracts.ICopyrightXmlGenerator.Generate">
+            <summary>
+            Generates a Roslyn comment trivia for the XML copyright header.
+            </summary>
+            <returns>The generated XML copyright header.</returns>
         </member>
         <member name="T:Present.CodeGeneration.Contracts.IInterfaceCodeGenerator">
             <summary>
@@ -171,6 +202,17 @@
             <param name="interfaceName">The name of the interface the type implements.</param>
             <returns>The generated interface declaration.</returns>
         </member>
+        <member name="T:Present.CodeGeneration.Generators.CopyrightXmlGenerator">
+            <summary>
+            Responsible for generating the Roslyn definition for an XML copyright header.
+            </summary>
+        </member>
+        <member name="M:Present.CodeGeneration.Generators.CopyrightXmlGenerator.Generate">
+            <summary>
+            Generates a Roslyn comment trivia for the XML copyright header.
+            </summary>
+            <returns>The generated XML copyright header.</returns>
+        </member>
         <member name="T:Present.CodeGeneration.Generators.InterfaceCodeGenerator">
             <summary>
             Responsible for generating the Roslyn definition for an interface.
@@ -200,11 +242,11 @@
             Responsible for generating the Roslyn definition for a namespace.
             </summary>
         </member>
-        <member name="M:Present.CodeGeneration.Generators.NamespaceCodeGenerator.#ctor(Ninject.Extensions.Logging.ILogger,Present.CodeGeneration.Contracts.IInterfaceCodeGenerator,Present.CodeGeneration.Contracts.IClassCodeGenerator,Present.CodeGeneration.Contracts.IMethodCodeGenerator)">
+        <member name="M:Present.CodeGeneration.Generators.NamespaceCodeGenerator.#ctor(Present.CodeGeneration.Contracts.ICopyrightXmlGenerator,Present.CodeGeneration.Contracts.IInterfaceCodeGenerator,Present.CodeGeneration.Contracts.IClassCodeGenerator,Present.CodeGeneration.Contracts.IMethodCodeGenerator)">
             <summary>
             Initializes a new instance of the <see cref="T:Present.CodeGeneration.Generators.NamespaceCodeGenerator"/> class.
             </summary>
-            <param name="logger">The logger.</param>
+            <param name="copyrightXmlGenerator">The copyright XML generator.</param>
             <param name="interfaceCodeGenerator">The interface code generator.</param>
             <param name="classCodeGenerator">The class code generator.</param>
             <param name="methodCodeGenerator">The method code generator.</param>
@@ -237,6 +279,37 @@
             </summary>
             <param name="method">The method to analyse.</param>
             <returns>Returns true when the method can be wrapped automatially, otherwise false.</returns>
+        </member>
+        <member name="T:Present.CodeGeneration.Resource">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Present.CodeGeneration.Resource.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Present.CodeGeneration.Resource.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Present.CodeGeneration.Resource.AutoGenerationDisclaimer">
+            <summary>
+              Looks up a localized string similar to This file was automatically generated with ♥ by Present.
+            </summary>
+        </member>
+        <member name="P:Present.CodeGeneration.Resource.LicenceDeclaration">
+            <summary>
+              Looks up a localized string similar to For usage and redistribution terms please refer to the LICENCE file.
+            </summary>
+        </member>
+        <member name="P:Present.CodeGeneration.Resource.ProjectWebsite">
+            <summary>
+              Looks up a localized string similar to For more information about the Present project visit https://github.com/ImAMightyPirate/Present.
+            </summary>
         </member>
         <member name="T:Present.CodeGeneration.TypeWrapper">
             <summary>
