@@ -22,7 +22,8 @@
             // Create a public interface
             return SyntaxFactory
                 .InterfaceDeclaration(interfaceName)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword));
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PartialKeyword));
         }
     }
 }
