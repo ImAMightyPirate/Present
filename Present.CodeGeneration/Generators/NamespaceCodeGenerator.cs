@@ -14,7 +14,7 @@
     /// </summary>
     public class NamespaceCodeGenerator : INamespaceCodeGenerator
     {
-        private readonly ILogger logger;
+        private readonly ICopyrightXmlGenerator copyrightXmlGenerator;
         private readonly IInterfaceCodeGenerator interfaceCodeGenerator;
         private readonly IClassCodeGenerator classCodeGenerator;
         private readonly IMethodCodeGenerator methodCodeGenerator;
@@ -22,17 +22,17 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="NamespaceCodeGenerator"/> class.
         /// </summary>
-        /// <param name="logger">The logger.</param>
+        /// <param name="copyrightXmlGenerator">The copyright XML generator.</param>
         /// <param name="interfaceCodeGenerator">The interface code generator.</param>
         /// <param name="classCodeGenerator">The class code generator.</param>
         /// <param name="methodCodeGenerator">The method code generator.</param>
         public NamespaceCodeGenerator(
-            ILogger logger,
+            ICopyrightXmlGenerator copyrightXmlGenerator,
             IInterfaceCodeGenerator interfaceCodeGenerator,
             IClassCodeGenerator classCodeGenerator,
             IMethodCodeGenerator methodCodeGenerator)
         {
-            this.logger = logger;
+            this.copyrightXmlGenerator = copyrightXmlGenerator;
             this.interfaceCodeGenerator = interfaceCodeGenerator;
             this.classCodeGenerator = classCodeGenerator;
             this.methodCodeGenerator = methodCodeGenerator;
@@ -54,10 +54,6 @@
             // Add a prefix to create an interface name from the type name
             var interfaceName = $"{Interface.DefaultPrefix}{typeName}";
 
-            // Substitute the System namespace with a Present equivelant
-            var namespaceName = SyntaxFactory.ParseName(typeNamespace.Replace(Namespace.System, Namespace.Present));
-
-            var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(namespaceName);
             var interfaceDeclaration = this.interfaceCodeGenerator.Generate(interfaceName);
             var classDeclaration = this.classCodeGenerator.Generate(typeName, interfaceName);
 
@@ -80,9 +76,33 @@
                 classDeclaration = classDeclaration.AddMembers(classMethodDeclaration);
             }
 
-            // Add the class to the namespace
+            var namespaceDeclaration = this.CreateNamespace(typeNamespace);
+
+            // Add the interface to the namespace
             namespaceDeclaration = namespaceDeclaration.AddMembers(interfaceDeclaration);
+
+            // Add the class to the namespace
             namespaceDeclaration = namespaceDeclaration.AddMembers(classDeclaration);
+
+            return namespaceDeclaration;
+        }
+
+        private NamespaceDeclarationSyntax CreateNamespace(string typeNamespace)
+        {
+            var documentationCommentTrivia = this.copyrightXmlGenerator.Generate();
+
+            // The documentation comment trivia must be wrapped into a token
+            var token = SyntaxFactory.Token(
+                SyntaxFactory.TriviaList(SyntaxFactory.Trivia(documentationCommentTrivia)),
+                SyntaxKind.NamespaceKeyword,
+                SyntaxFactory.TriviaList());
+
+            // Substitute the System namespace with a Present equivelant
+            var namespaceName = SyntaxFactory.ParseName(typeNamespace.Replace(Namespace.System, Namespace.Present));
+
+            var namespaceDeclaration = SyntaxFactory
+                .NamespaceDeclaration(namespaceName)
+                .WithNamespaceKeyword(token);
 
             return namespaceDeclaration;
         }
