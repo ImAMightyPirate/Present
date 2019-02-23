@@ -1,4 +1,4 @@
-# Present
+# ![presentwithname](https://user-images.githubusercontent.com/5412869/53291535-94b05f00-37ac-11e9-8754-dbf8cf6a21fe.png)
 
 Present is a toolset for quickly creating lightweight wrappers around existing C# APIs and libraries. These wrappers are designed to help you write code that is easier to maintain and test, while keeping the amount of changes necessary to a minimum.
 
