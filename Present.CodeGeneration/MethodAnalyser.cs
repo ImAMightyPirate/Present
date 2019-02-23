@@ -72,19 +72,21 @@
                 return this.IsSupportedType(type.GetElementType());
             }
 
-            // All value types are supported (which also includes the void return type)
-            if (type.IsValueType)
-            {
-                return true;
-            }
-
-            // Common reference types are also supported
+            // Common reference types that cause no difficulties with mocking are supported
             if (type == typeof(string))
             {
                 return true;
             }
 
-            return false;
+            // Structures passed by reference (ref struct), such as Span<T>, are not supported
+            // even though they are value types
+            if (type.IsByRefLike)
+            {
+                return false;
+            }
+
+            // Any remaining value types are supported (which also includes the void return type)
+            return type.IsValueType;
         }
     }
 }
