@@ -10,16 +10,6 @@ namespace Present.CodeGeneration.Constants
     public static class Namespace
     {
         /// <summary>
-        /// The Code Analysis namespace.
-        /// </summary>
-        public const string CodeAnalysis = "CodeAnalysis";
-
-        /// <summary>
-        /// The Diagnostics namespace.
-        /// </summary>
-        public const string Diagnostics = "Diagnostics";
-
-        /// <summary>
         /// The Present namespace.
         /// </summary>
         public const string Present = "Present";
