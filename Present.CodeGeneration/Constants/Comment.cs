@@ -7,7 +7,7 @@ namespace Present.CodeGeneration.Constants
     /// <summary>
     /// Comment constants.
     /// </summary>
-    public class Comment
+    public static class Comment
     {
         /// <summary>
         /// The single line documentation prefix.

@@ -7,7 +7,7 @@ namespace Present.CodeGeneration.Constants
     /// <summary>
     /// Interface constants.
     /// </summary>
-    public class Interface
+    public static class Interface
     {
         /// <summary>
         /// The interface default prefix.

@@ -7,7 +7,7 @@ namespace Present.CodeGeneration.Constants
     /// <summary>
     /// XML element identifier constants.
     /// </summary>
-    public class XmlElementIdentifier
+    public static class XmlElementIdentifier
     {
         /// <summary>
         /// The copyright identifier.

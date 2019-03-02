@@ -7,7 +7,7 @@ namespace Present.CodeGeneration.Constants
     /// <summary>
     /// Language keyword constants.
     /// </summary>
-    public class LanguageKeyword
+    public static class LanguageKeyword
     {
         /// <summary>
         /// The void keyword.

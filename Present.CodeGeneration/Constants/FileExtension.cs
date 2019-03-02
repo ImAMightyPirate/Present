@@ -7,7 +7,7 @@ namespace Present.CodeGeneration.Constants
     /// <summary>
     /// File extension constants.
     /// </summary>
-    public class FileExtension
+    public static class FileExtension
     {
         /// <summary>
         /// The C# file extension.

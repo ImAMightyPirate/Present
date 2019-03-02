@@ -7,7 +7,7 @@ namespace Present.CodeGeneration.Constants
     /// <summary>
     /// Namespace constants.
     /// </summary>
-    public class Namespace
+    public static class Namespace
     {
         /// <summary>
         /// The Code Analysis namespace.
