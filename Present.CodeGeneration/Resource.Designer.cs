@@ -61,7 +61,7 @@ namespace Present.CodeGeneration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This file was automatically generated with ♥ by Present.
+        ///   Looks up a localized string similar to This file was automatically generated with ♥ by Present.NET..
         /// </summary>
         internal static string AutoGenerationDisclaimer {
             get {
@@ -70,7 +70,7 @@ namespace Present.CodeGeneration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For usage and redistribution terms please refer to the LICENCE file.
+        ///   Looks up a localized string similar to Present.NET is licensed under the MIT License. For usage and redistribution terms please refer to the LICENSE file..
         /// </summary>
         internal static string LicenceDeclaration {
             get {
@@ -79,7 +79,7 @@ namespace Present.CodeGeneration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For more information about the Present project visit https://github.com/ImAMightyPirate/Present.
+        ///   Looks up a localized string similar to For more information about the Present.NET project visit https://github.com/ImAMightyPirate/Present..
         /// </summary>
         internal static string ProjectWebsite {
             get {
