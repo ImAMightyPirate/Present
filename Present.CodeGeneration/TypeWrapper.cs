@@ -7,9 +7,9 @@ namespace Present.CodeGeneration
     using System;
     using System.Collections.Generic;
     using System.Reflection;
-    using Contracts;
     using EnsureThat;
     using Ninject.Extensions.Logging;
+    using Present.CodeGeneration.Contracts;
 
     /// <summary>
     /// Class responsible from wrapping a type.

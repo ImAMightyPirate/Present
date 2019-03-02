@@ -5,11 +5,11 @@
 namespace Present.CodeGeneration.Generators
 {
     using System;
-    using Constants;
-    using Contracts;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using Present.CodeGeneration.Constants;
+    using Present.CodeGeneration.Contracts;
 
     /// <summary>
     /// Responsible for generating the Roslyn definition for an XML copyright header.

@@ -6,12 +6,12 @@ namespace Present.CodeGeneration
 {
     using System.IO;
     using System.Text;
-    using Constants;
-    using Contracts;
     using EnsureThat;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Ninject.Extensions.Logging;
+    using Present.CodeGeneration.Constants;
+    using Present.CodeGeneration.Contracts;
 
     /// <summary>
     /// Responsible for writing generated code to a file.

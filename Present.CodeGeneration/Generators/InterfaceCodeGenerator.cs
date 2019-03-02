@@ -4,10 +4,10 @@
 
 namespace Present.CodeGeneration.Generators
 {
-    using Contracts;
     using EnsureThat;
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using Present.CodeGeneration.Contracts;
 
     /// <summary>
     /// Responsible for generating the Roslyn definition for an interface.

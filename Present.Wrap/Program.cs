@@ -7,12 +7,11 @@ namespace Present.Wrap
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.IO;
-
-    using CodeGeneration.Contracts;
     using McMaster.Extensions.CommandLineUtils;
     using Ninject;
     using Ninject.Extensions.Conventions;
     using Ninject.Extensions.Logging.Serilog;
+    using Present.CodeGeneration.Contracts;
     using Serilog;
     using Serilog.Core;
     using Serilog.Events;

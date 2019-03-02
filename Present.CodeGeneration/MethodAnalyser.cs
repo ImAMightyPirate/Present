@@ -6,9 +6,9 @@ namespace Present.CodeGeneration
 {
     using System;
     using System.Reflection;
-    using Contracts;
     using EnsureThat;
     using Ninject.Extensions.Logging;
+    using Present.CodeGeneration.Contracts;
 
     /// <summary>
     /// Class responsible for determining whether a method can have a wrapper automatically

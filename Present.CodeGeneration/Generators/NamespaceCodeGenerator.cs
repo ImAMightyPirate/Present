@@ -6,12 +6,12 @@ namespace Present.CodeGeneration.Generators
 {
     using System.Collections.Generic;
     using System.Reflection;
-    using Constants;
-    using Contracts;
     using EnsureThat;
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Ninject.Extensions.Logging;
+    using Present.CodeGeneration.Constants;
+    using Present.CodeGeneration.Contracts;
 
     /// <summary>
     /// Responsible for generating the Roslyn definition for a namespace.
