@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
+  "settings": {
+    "documentationRules": {
+      "companyName": "Present.NET",
+      "copyrightText": "Copyright (c) {companyName}. All Rights Reserved.\nPresent.NET is licensed under the MIT License. For usage and redistribution terms please refer to the LICENSE file.\nFor more information about the Present.NET project visit https://github.com/ImAMightyPirate/Present.",
+      "xmlHeader": false
+    },
+    "layoutRules": {
+    }
+  }
+}
