@@ -1,10 +1,14 @@
-﻿namespace Present.CodeGeneration
+﻿// Copyright (c) Present.NET. All Rights Reserved.
+// Present.NET is licensed under the MIT License. For usage and redistribution terms please refer to the LICENSE file.
+// For more information about the Present.NET project visit https://github.com/ImAMightyPirate/Present.
+
+namespace Present.CodeGeneration
 {
     using System;
     using System.Reflection;
-    using Contracts;
     using EnsureThat;
     using Ninject.Extensions.Logging;
+    using Present.CodeGeneration.Contracts;
 
     /// <summary>
     /// Class responsible for determining whether a method can have a wrapper automatically
@@ -72,19 +76,21 @@
                 return this.IsSupportedType(type.GetElementType());
             }
 
-            // All value types are supported (which also includes the void return type)
-            if (type.IsValueType)
-            {
-                return true;
-            }
-
-            // Common reference types are also supported
+            // Common reference types that cause no difficulties with mocking are supported
             if (type == typeof(string))
             {
                 return true;
             }
 
-            return false;
+            // Structures passed by reference (ref struct), such as Span<T>, are not supported
+            // even though they are value types
+            if (type.IsByRefLike)
+            {
+                return false;
+            }
+
+            // Any remaining value types are supported (which also includes the void return type)
+            return type.IsValueType;
         }
     }
 }

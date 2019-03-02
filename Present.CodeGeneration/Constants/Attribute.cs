@@ -5,13 +5,18 @@
 namespace Present.CodeGeneration.Constants
 {
     /// <summary>
-    /// File extension constants.
+    /// Attribute constants.
     /// </summary>
-    public static class FileExtension
+    public static class Attribute
     {
         /// <summary>
-        /// The C# file extension.
+        /// The MEF export attribute.
         /// </summary>
-        public const string CSharp = "cs";
+        public const string MefExport = "System.ComponentModel.Composition.ExportAttribute";
+
+        /// <summary>
+        /// The MEF2 export attribute.
+        /// </summary>
+        public const string Mef2Export = "System.Composition.ExportAttribute";
     }
 }

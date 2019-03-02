@@ -1,13 +1,17 @@
-﻿namespace Present.CodeGeneration
+﻿// Copyright (c) Present.NET. All Rights Reserved.
+// Present.NET is licensed under the MIT License. For usage and redistribution terms please refer to the LICENSE file.
+// For more information about the Present.NET project visit https://github.com/ImAMightyPirate/Present.
+
+namespace Present.CodeGeneration
 {
     using System.IO;
     using System.Text;
-    using Constants;
-    using Contracts;
     using EnsureThat;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Ninject.Extensions.Logging;
+    using Present.CodeGeneration.Constants;
+    using Present.CodeGeneration.Contracts;
 
     /// <summary>
     /// Responsible for writing generated code to a file.

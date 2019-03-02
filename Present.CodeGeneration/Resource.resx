@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AutoGenerationDisclaimer" xml:space="preserve">
-    <value>This file was automatically generated with ♥ by Present</value>
+    <value>This file was automatically generated with ♥ by Present.NET.</value>
   </data>
   <data name="LicenceDeclaration" xml:space="preserve">
-    <value>For usage and redistribution terms please refer to the LICENCE file</value>
+    <value>Present.NET is licensed under the MIT License. For usage and redistribution terms please refer to the LICENSE file.</value>
   </data>
   <data name="ProjectWebsite" xml:space="preserve">
-    <value>For more information about the Present project visit https://github.com/ImAMightyPirate/Present</value>
+    <value>For more information about the Present.NET project visit https://github.com/ImAMightyPirate/Present.</value>
   </data>
 </root>
