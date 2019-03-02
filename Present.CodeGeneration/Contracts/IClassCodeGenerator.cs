@@ -4,6 +4,7 @@
 
 namespace Present.CodeGeneration.Contracts
 {
+    using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
     /// <summary>
@@ -15,8 +16,14 @@ namespace Present.CodeGeneration.Contracts
         /// Generates a Roslyn class definition.
         /// </summary>
         /// <param name="typeName">The type name.</param>
+        /// <param name="attributes">The attributes to decorate the class.</param>
+        /// <param name="modifiers">Modifiers to be applied to the class.</param>
         /// <param name="interfaceName">The name of the interface the type implements.</param>
-        /// <returns>The generated interface declaration.</returns>
-        ClassDeclarationSyntax Generate(string typeName, string interfaceName);
+        /// <returns>The generated class declaration.</returns>
+        ClassDeclarationSyntax Generate(
+            string typeName,
+            AttributeSyntax[] attributes,
+            SyntaxToken[] modifiers,
+            string interfaceName = null);
     }
 }
