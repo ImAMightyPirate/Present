@@ -1,9 +1,13 @@
-﻿namespace Present.CodeGeneration.Generators
+﻿// Copyright (c) Present.NET. All Rights Reserved.
+// Present.NET is licensed under the MIT License. For usage and redistribution terms please refer to the LICENSE file.
+// For more information about the Present.NET project visit https://github.com/ImAMightyPirate/Present.
+
+namespace Present.CodeGeneration.Generators
 {
-    using Contracts;
     using EnsureThat;
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using Present.CodeGeneration.Contracts;
 
     /// <summary>
     /// Responsible for generating the Roslyn definition for an interface.
