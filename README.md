@@ -1,4 +1,4 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/imamightypirate/present/badge)](https://www.codefactor.io/repository/github/imamightypirate/present)
+[![Build Status](https://dev.azure.com/presentdotnet/Present/_apis/build/status/ImAMightyPirate.Present?branchName=develop)](https://dev.azure.com/presentdotnet/Present/_build/latest?definitionId=1&branchName=develop) [![CodeFactor](https://www.codefactor.io/repository/github/imamightypirate/present/badge)](https://www.codefactor.io/repository/github/imamightypirate/present)
 
 # ![presentwithname](https://user-images.githubusercontent.com/5412869/53291535-94b05f00-37ac-11e9-8754-dbf8cf6a21fe.png)
 
