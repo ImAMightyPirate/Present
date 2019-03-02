@@ -12,6 +12,7 @@ namespace Present.Wrap
     using Ninject.Extensions.Conventions;
     using Ninject.Extensions.Logging.Serilog;
     using Present.CodeGeneration.Contracts;
+    using Present.CodeGeneration.DomainObjects;
     using Serilog;
     using Serilog.Core;
     using Serilog.Events;
@@ -50,6 +51,18 @@ namespace Present.Wrap
         public bool Quiet { get; } = false;
 
         /// <summary>
+        /// Gets a value indicating whether MEF export attributes should be emitted.
+        /// </summary>
+        [Option(CommandOptionType.NoValue, ShortName = "m", Description = "Decorate generated classes with MEF export attribute (System.ComponentModel.Composition).")]
+        public bool Mef { get; } = false;
+
+        /// <summary>
+        /// Gets a value indicating whether MEF2 export attributes should be emitted.
+        /// </summary>
+        [Option(CommandOptionType.NoValue, ShortName = "m2", Description = "Decorate generated classes with MEF2 export attribute (System.Composition).")]
+        public bool Mef2 { get; } = false;
+
+        /// <summary>
         /// Initial method called when the program is started. This is routed to
         /// the CommandLineUtils NuGet package to parse the command line arguments,
         /// which then subsequently runs the <see cref="OnExecute"/> method.
@@ -70,9 +83,18 @@ namespace Present.Wrap
             var kernel = new StandardKernel(new SerilogModule());
             kernel.Bind(k => { k.FromAssembliesMatching("*.dll").SelectAllClasses().BindAllInterfaces(); });
 
+            // Populate the program options
+            var wrapOptions = new WrapOptions
+            {
+                AssemblyQualifiedTypeName = this.Type,
+                OutputPath = this.Output,
+                IncludeMefAttribute = this.Mef,
+                IncludeMef2Attribute = this.Mef2
+            };
+
             // Perform the wrapping
             var typeWrapper = kernel.Get<ITypeWrapper>();
-            typeWrapper.Wrap(this.Type, this.Output);
+            typeWrapper.Wrap(wrapOptions);
         }
 
         /// <summary>

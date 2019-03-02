@@ -13,8 +13,7 @@ namespace Present.CodeGeneration.Contracts
         /// Creates a wrapper class for a .NET type and outputs
         /// the code file.
         /// </summary>
-        /// <param name="assemblyQualifiedTypeName">The assembly qualified name of the .NET type to be wrapped.</param>
-        /// <param name="outputPath">The output path of the generated code file.</param>
-        void Wrap(string assemblyQualifiedTypeName, string outputPath);
+        /// <param name="options">The program options.</param>
+        void Wrap(IWrapOptions options);
     }
 }

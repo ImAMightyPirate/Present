@@ -5,6 +5,7 @@
 namespace Present.CodeGeneration.Generators
 {
     using EnsureThat;
+    using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Present.CodeGeneration.Contracts;
@@ -18,16 +19,19 @@ namespace Present.CodeGeneration.Generators
         /// Generates a Roslyn interface definition.
         /// </summary>
         /// <param name="interfaceName">The interface name.</param>
+        /// <param name="modifiers">Modifiers to be applied to the interface.</param>
         /// <returns>The generated interface declaration.</returns>
-        public InterfaceDeclarationSyntax Generate(string interfaceName)
+        public InterfaceDeclarationSyntax Generate(
+            string interfaceName,
+            SyntaxToken[] modifiers)
         {
             Ensure.That(interfaceName).IsNotNullOrWhiteSpace();
+            Ensure.That(modifiers).IsNotNull();
 
-            // Create a public interface
+            // Create an interface with the modifiers supplied
             return SyntaxFactory
                 .InterfaceDeclaration(interfaceName)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PartialKeyword));
+                .AddModifiers(modifiers);
         }
     }
 }

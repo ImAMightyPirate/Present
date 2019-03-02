@@ -5,18 +5,18 @@
 namespace Present.CodeGeneration.Constants
 {
     /// <summary>
-    /// Namespace constants.
+    /// Attribute constants.
     /// </summary>
-    public static class Namespace
+    public static class Attribute
     {
         /// <summary>
-        /// The Present namespace.
+        /// The MEF export attribute.
         /// </summary>
-        public const string Present = "Present";
+        public const string MefExport = "System.ComponentModel.Composition.ExportAttribute";
 
         /// <summary>
-        /// The System namespace.
+        /// The MEF2 export attribute.
         /// </summary>
-        public const string System = "System";
+        public const string Mef2Export = "System.Composition.ExportAttribute";
     }
 }

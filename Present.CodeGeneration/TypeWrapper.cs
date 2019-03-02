@@ -18,7 +18,7 @@ namespace Present.CodeGeneration
     {
         private readonly ILogger logger;
         private readonly IMethodAnalyser methodAnalyser;
-        private readonly INamespaceCodeGenerator namespaceCodeGenerator;
+        private readonly IWrapperGenerator wrapperGenerator;
         private readonly ICodeFileWriter codeFileWriter;
 
         /// <summary>
@@ -26,17 +26,17 @@ namespace Present.CodeGeneration
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="methodAnalyser">The method analyser.</param>
-        /// <param name="namespaceCodeGenerator">The namespace code generator.</param>
+        /// <param name="wrapperGenerator">The wrapper generator.</param>
         /// <param name="codeFileWriter">The code file writer.</param>
         public TypeWrapper(
             ILogger logger,
             IMethodAnalyser methodAnalyser,
-            INamespaceCodeGenerator namespaceCodeGenerator,
+            IWrapperGenerator wrapperGenerator,
             ICodeFileWriter codeFileWriter)
         {
             this.logger = logger;
             this.methodAnalyser = methodAnalyser;
-            this.namespaceCodeGenerator = namespaceCodeGenerator;
+            this.wrapperGenerator = wrapperGenerator;
             this.codeFileWriter = codeFileWriter;
         }
 
@@ -44,18 +44,18 @@ namespace Present.CodeGeneration
         /// Creates a wrapper class for a .NET type and outputs
         /// the code file.
         /// </summary>
-        /// <param name="assemblyQualifiedTypeName">The assembly qualified name of the .NET type to be wrapped.</param>
-        /// <param name="outputPath">The output path of the generated code file.</param>
-        public void Wrap(string assemblyQualifiedTypeName, string outputPath)
+        /// <param name="options">The program options.</param>
+        public void Wrap(IWrapOptions options)
         {
-            Ensure.That(assemblyQualifiedTypeName).IsNotNullOrWhiteSpace();
-            Ensure.That(outputPath).IsNotNullOrWhiteSpace();
+            Ensure.That(options).IsNotNull();
+            Ensure.That(options.AssemblyQualifiedTypeName).IsNotNullOrWhiteSpace();
+            Ensure.That(options.OutputPath).IsNotNullOrWhiteSpace();
 
-            var type = Type.GetType(assemblyQualifiedTypeName);
+            var type = Type.GetType(options.AssemblyQualifiedTypeName);
 
             if (type == null)
             {
-                this.logger.Fatal($"Type not found for assembly qualified name '{assemblyQualifiedTypeName}'");
+                this.logger.Fatal($"Type not found for assembly qualified name '{options.OutputPath}'");
                 return;
             }
 
@@ -75,7 +75,8 @@ namespace Present.CodeGeneration
 
             this.logger.Debug($"{supportedMethods.Count} of {totalMethodCount} methods for type '{type}.Name' are supported.");
 
-            var namespaceDeclaration = this.namespaceCodeGenerator.Generate(
+            var namespaceDeclaration = this.wrapperGenerator.Generate(
+                options,
                 type.Namespace,
                 type.Name,
                 supportedMethods);
@@ -83,7 +84,7 @@ namespace Present.CodeGeneration
             this.codeFileWriter.WriteCodeFileToPath(
                 type.Name,
                 namespaceDeclaration,
-                outputPath);
+                options.OutputPath);
         }
     }
 }
