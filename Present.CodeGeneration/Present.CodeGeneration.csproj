@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\Repos\Present\Present.CodeGeneration\Present.CodeGeneration.xml</DocumentationFile>
+    <DocumentationFile />
   </PropertyGroup>
 
   <ItemGroup>
