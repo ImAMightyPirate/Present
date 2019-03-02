@@ -1,6 +1,6 @@
 [![Build Status](https://dev.azure.com/presentdotnet/Present/_apis/build/status/ImAMightyPirate.Present?branchName=develop)](https://dev.azure.com/presentdotnet/Present/_build/latest?definitionId=1&branchName=develop) [![CodeFactor](https://www.codefactor.io/repository/github/imamightypirate/present/badge)](https://www.codefactor.io/repository/github/imamightypirate/present)
 
-# ![presentwithname](https://user-images.githubusercontent.com/5412869/53291535-94b05f00-37ac-11e9-8754-dbf8cf6a21fe.png)
+# ![presenttextonly](https://user-images.githubusercontent.com/5412869/53685427-70a3cf00-3d12-11e9-9d1c-affafe802ae7.png)
 
 Present is a toolset for quickly creating lightweight wrappers around existing C# APIs and libraries. These wrappers are designed to help you write code that is easier to maintain and test, while keeping the amount of changes necessary to a minimum.
 
