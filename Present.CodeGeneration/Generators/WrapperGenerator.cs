@@ -124,11 +124,21 @@ namespace Present.CodeGeneration.Generators
             IWrapOptions options,
             string interfaceName)
         {
+            var toolNameArgument = SyntaxFactory.AttributeArgument(
+                SyntaxFactory.LiteralExpression(
+                    SyntaxKind.StringLiteralExpression,
+                    SyntaxFactory.Literal(Resource.ProjectName)));
+
+            var toolVersionArgument = SyntaxFactory.AttributeArgument(
+                SyntaxFactory.LiteralExpression(
+                    SyntaxKind.StringLiteralExpression,
+                    SyntaxFactory.Literal(string.Empty)));
+
             var attributes = new List<AttributeSyntax>
             {
                 this.attributeCodeGenerator.Generate(typeof(DebuggerNonUserCodeAttribute)),
                 this.attributeCodeGenerator.Generate(typeof(ExcludeFromCodeCoverageAttribute)),
-                this.attributeCodeGenerator.Generate(typeof(GeneratedCodeAttribute))
+                this.attributeCodeGenerator.Generate(typeof(GeneratedCodeAttribute), toolNameArgument, toolVersionArgument)
             };
 
             var mefExportArgument = SyntaxFactory.AttributeArgument(

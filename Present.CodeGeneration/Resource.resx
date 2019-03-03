@@ -123,6 +123,9 @@
   <data name="LicenceDeclaration" xml:space="preserve">
     <value>Present.NET is licensed under the MIT License. For usage and redistribution terms please refer to the LICENSE file.</value>
   </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>Present.NET</value>
+  </data>
   <data name="ProjectWebsite" xml:space="preserve">
     <value>For more information about the Present.NET project visit https://github.com/ImAMightyPirate/Present.</value>
   </data>
