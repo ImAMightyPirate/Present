@@ -5,14 +5,12 @@
 namespace Present.Wrap
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
     using System.IO;
     using McMaster.Extensions.CommandLineUtils;
     using Ninject;
     using Ninject.Extensions.Conventions;
     using Ninject.Extensions.Logging.Serilog;
     using Present.CodeGeneration.Contracts;
-    using Present.CodeGeneration.DomainObjects;
     using Serilog;
     using Serilog.Core;
     using Serilog.Events;
@@ -22,46 +20,8 @@ namespace Present.Wrap
     /// for Present's code generation utilities.
     /// </summary>
     [Command(Name = "wrap", Description = "Utility to create a wrapper class for a .NET type.")]
-    public class Program
+    public class Program : WrapOptions
     {
-        /// <summary>
-        /// Gets the .NET type to be wrapped.
-        /// </summary>
-        [Required]
-        [Option(ShortName = "t", Description = "The assembly qualified name of the .NET type to be wrapped.")]
-        public string Type { get; } = string.Empty;
-
-        /// <summary>
-        /// Gets the path where the wrapper class code file should be output.
-        /// </summary>
-        [Required]
-        [Option(ShortName = "o", Description = "The path where the wrapper class code file should be output.")]
-        public string Output { get; } = string.Empty;
-
-        /// <summary>
-        /// Gets a value indicating whether verbose logging is enabled.
-        /// </summary>
-        [Option(CommandOptionType.NoValue, ShortName = "v", Description = "Run with verbose logging.")]
-        public bool Verbose { get; } = false;
-
-        /// <summary>
-        /// Gets a value indicating whether quiet logging is enabled (i.e. logging is turned off).
-        /// </summary>
-        [Option(CommandOptionType.NoValue, ShortName = "q", Description = "Run with no logging.")]
-        public bool Quiet { get; } = false;
-
-        /// <summary>
-        /// Gets a value indicating whether MEF export attributes should be emitted.
-        /// </summary>
-        [Option(CommandOptionType.NoValue, ShortName = "m", Description = "Decorate generated classes with MEF export attribute (System.ComponentModel.Composition).")]
-        public bool Mef { get; } = false;
-
-        /// <summary>
-        /// Gets a value indicating whether MEF2 export attributes should be emitted.
-        /// </summary>
-        [Option(CommandOptionType.NoValue, ShortName = "m2", Description = "Decorate generated classes with MEF2 export attribute (System.Composition).")]
-        public bool Mef2 { get; } = false;
-
         /// <summary>
         /// Initial method called when the program is started. This is routed to
         /// the CommandLineUtils NuGet package to parse the command line arguments,
@@ -83,18 +43,9 @@ namespace Present.Wrap
             var kernel = new StandardKernel(new SerilogModule());
             kernel.Bind(k => { k.FromAssembliesMatching("*.dll").SelectAllClasses().BindAllInterfaces(); });
 
-            // Populate the program options
-            var wrapOptions = new WrapOptions
-            {
-                AssemblyQualifiedTypeName = this.Type,
-                OutputPath = this.Output,
-                IncludeMefAttribute = this.Mef,
-                IncludeMef2Attribute = this.Mef2
-            };
-
             // Perform the wrapping
             var typeWrapper = kernel.Get<ITypeWrapper>();
-            typeWrapper.Wrap(wrapOptions);
+            typeWrapper.Wrap(this);
         }
 
         /// <summary>
@@ -106,14 +57,14 @@ namespace Present.Wrap
             var levelSwitch = new LoggingLevelSwitch { MinimumLevel = LogEventLevel.Information };
 
             // Only log on error when quiet logging is specified
-            if (this.Quiet)
+            if (this.UseQuietLogging)
             {
                 levelSwitch.MinimumLevel = LogEventLevel.Error;
             }
 
             // Log everything including debug when verbose logging is specified
             // (verbose intentionally overrides quiet logging)
-            if (this.Verbose)
+            if (this.UseVerboseLogging)
             {
                 levelSwitch.MinimumLevel = LogEventLevel.Debug;
             }
