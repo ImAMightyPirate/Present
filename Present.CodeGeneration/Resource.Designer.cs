@@ -79,6 +79,15 @@ namespace Present.CodeGeneration {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Present.NET.
+        /// </summary>
+        internal static string ProjectName {
+            get {
+                return ResourceManager.GetString("ProjectName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to For more information about the Present.NET project visit https://github.com/ImAMightyPirate/Present..
         /// </summary>
         internal static string ProjectWebsite {
