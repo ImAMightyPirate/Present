@@ -44,6 +44,14 @@ namespace Present.CodeGeneration
                 return false;
             }
 
+            // Presence of special name flag indicates something out of the ordinary
+            // (such as an operator which cannot be wrapped)
+            if (method.IsSpecialName)
+            {
+                this.logger.Debug($"Method '{method.Name}' has special name");
+                return false;
+            }
+
             // Return type must be a supported type
             if (!this.IsSupportedType(method.ReturnType))
             {
