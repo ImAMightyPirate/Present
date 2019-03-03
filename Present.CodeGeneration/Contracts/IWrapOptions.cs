@@ -10,9 +10,9 @@ namespace Present.CodeGeneration.Contracts
     public interface IWrapOptions
     {
         /// <summary>
-        /// Gets or sets the assembly qualified name of the .NET type to be wrapped.
+        /// Gets or sets the assembly qualified name of the .NET types to be wrapped.
         /// </summary>
-        string AssemblyQualifiedTypeName { get; set; }
+        string[] AssemblyQualifiedTypeNames { get; set; }
 
         /// <summary>
         /// Gets or sets the output path of the generated code files.
@@ -20,12 +20,22 @@ namespace Present.CodeGeneration.Contracts
         string OutputPath { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether MEF attribute should be emitted.
+        /// Gets or sets a value indicating whether verbose logging is enabled.
+        /// </summary>
+        bool UseVerboseLogging { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether quiet logging is enabled (i.e. logging is turned off).
+        /// </summary>
+        bool UseQuietLogging { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether MEF export attributes should be emitted.
         /// </summary>
         bool IncludeMefAttribute { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether MEF2 attribute should be emitted.
+        /// Gets or sets a value indicating whether MEF2 export attributes should be emitted.
         /// </summary>
         bool IncludeMef2Attribute { get; set; }
     }

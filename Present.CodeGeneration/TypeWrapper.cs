@@ -48,43 +48,47 @@ namespace Present.CodeGeneration
         public void Wrap(IWrapOptions options)
         {
             Ensure.That(options).IsNotNull();
-            Ensure.That(options.AssemblyQualifiedTypeName).IsNotNullOrWhiteSpace();
+            Ensure.That(options.AssemblyQualifiedTypeNames).IsNotNull();
             Ensure.That(options.OutputPath).IsNotNullOrWhiteSpace();
 
-            var type = Type.GetType(options.AssemblyQualifiedTypeName);
-
-            if (type == null)
+            foreach (var assemblyQualifiedTypeName in options.AssemblyQualifiedTypeNames)
             {
-                this.logger.Fatal($"Type not found for assembly qualified name '{options.OutputPath}'");
-                return;
-            }
+                var type = Type.GetType(assemblyQualifiedTypeName);
 
-            var supportedMethods = new List<MethodInfo>();
-
-            var totalMethodCount = 0;
-
-            foreach (var method in type.GetMethods())
-            {
-                if (this.methodAnalyser.IsWrappingSupported(method))
+                if (type == null)
                 {
-                    supportedMethods.Add(method);
+                    this.logger.Fatal($"Type not found for assembly qualified name '{options.OutputPath}'");
+                    return;
                 }
 
-                totalMethodCount++;
+                var supportedMethods = new List<MethodInfo>();
+
+                var totalMethodCount = 0;
+
+                foreach (var method in type.GetMethods())
+                {
+                    if (this.methodAnalyser.IsWrappingSupported(method))
+                    {
+                        supportedMethods.Add(method);
+                    }
+
+                    totalMethodCount++;
+                }
+
+                this.logger.Debug(
+                    $"{supportedMethods.Count} of {totalMethodCount} methods for type '{type}.Name' are supported.");
+
+                var namespaceDeclaration = this.wrapperGenerator.Generate(
+                    options,
+                    type.Namespace,
+                    type.Name,
+                    supportedMethods);
+
+                this.codeFileWriter.WriteCodeFileToPath(
+                    type.Name,
+                    namespaceDeclaration,
+                    options.OutputPath);
             }
-
-            this.logger.Debug($"{supportedMethods.Count} of {totalMethodCount} methods for type '{type}.Name' are supported.");
-
-            var namespaceDeclaration = this.wrapperGenerator.Generate(
-                options,
-                type.Namespace,
-                type.Name,
-                supportedMethods);
-
-            this.codeFileWriter.WriteCodeFileToPath(
-                type.Name,
-                namespaceDeclaration,
-                options.OutputPath);
         }
     }
 }
