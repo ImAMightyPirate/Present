@@ -4,16 +4,18 @@
 
 namespace Present.CodeGeneration.Contracts
 {
+    using Present.CodeGeneration.Wrappers.Custom;
+
     /// <summary>
-    /// Contract for the type wrapper.
+    /// Contract for the type analyser.
     /// </summary>
-    public interface ITypeWrapper
+    public interface ITypeAnalyser
     {
         /// <summary>
-        /// Creates a wrapper class for a .NET type and outputs
-        /// the code file.
+        /// Determines whether a type can be wrapped.
         /// </summary>
-        /// <param name="options">The program options.</param>
-        void Wrap(IWrapOptions options);
+        /// <param name="type">The type.</param>
+        /// <returns>True when the type can be wrapped, otherwise false.</returns>
+        bool CanWrap(ITypeWrapper type);
     }
 }

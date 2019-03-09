@@ -4,7 +4,7 @@
 
 namespace Present.CodeGeneration.Contracts
 {
-    using System.Reflection;
+    using Present.CodeGeneration.Wrappers.Custom;
 
     /// <summary>
     /// Contract for the method analyser.
@@ -17,6 +17,6 @@ namespace Present.CodeGeneration.Contracts
         /// </summary>
         /// <param name="method">The method to analyse.</param>
         /// <returns>Returns true when the method can be wrapped automatially, otherwise false.</returns>
-        bool IsWrappingSupported(MethodInfo method);
+        bool CanWrap(IMethodInfoWrapper method);
     }
 }

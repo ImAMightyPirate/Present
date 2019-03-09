@@ -4,14 +4,13 @@
 
 namespace Present.CodeGeneration
 {
-    using System.IO;
     using System.Text;
     using EnsureThat;
-    using Microsoft.CodeAnalysis;
-    using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Ninject.Extensions.Logging;
     using Present.CodeGeneration.Constants;
     using Present.CodeGeneration.Contracts;
+    using Present.CodeGeneration.Wrappers.Custom;
+    using Present.IO;
 
     /// <summary>
     /// Responsible for writing generated code to a file.
@@ -19,14 +18,23 @@ namespace Present.CodeGeneration
     public class CodeFileWriter : ICodeFileWriter
     {
         private readonly ILogger logger;
+        private readonly IFile file;
+        private readonly IPath path;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CodeFileWriter"/> class.
         /// </summary>
-        /// <param name="logger">Tbe logger.</param>
-        public CodeFileWriter(ILogger logger)
+        /// <param name="logger">The logger.</param>
+        /// <param name="file">Wrapper for <see cref="System.IO.File"/>.</param>
+        /// <param name="path">Wrapper for <see cref="System.IO.Path"/>.</param>
+        public CodeFileWriter(
+            ILogger logger,
+            IFile file,
+            IPath path)
         {
             this.logger = logger;
+            this.file = file;
+            this.path = path;
         }
 
         /// <summary>
@@ -37,23 +45,22 @@ namespace Present.CodeGeneration
         /// <param name="outputPath">The output path for the file.</param>
         public void WriteCodeFileToPath(
             string typeName,
-            NamespaceDeclarationSyntax namespaceDeclaration,
+            INamespaceDeclarationSyntaxWrapper namespaceDeclaration,
             string outputPath)
         {
+            Ensure.That(typeName).IsNotNullOrWhiteSpace();
             Ensure.That(namespaceDeclaration).IsNotNull();
             Ensure.That(outputPath).IsNotNullOrWhiteSpace();
 
             // Normalise so that the generated code is in a readable format
-            var generatedCode = namespaceDeclaration
-                .NormalizeWhitespace()
-                .ToFullString();
+            var generatedCode = namespaceDeclaration.ToString();
 
             var fileName = $"{typeName}.{FileExtension.CSharp}";
-            var filePath = Path.Combine(outputPath, fileName);
+            var filePath = this.path.Combine(outputPath, fileName);
 
             this.logger.Debug($"Writing code file to path '{filePath}'");
 
-            File.WriteAllText(filePath, generatedCode, Encoding.UTF8);
+            this.file.WriteAllText(filePath, generatedCode, Encoding.UTF8);
         }
     }
 }

@@ -5,12 +5,14 @@
 namespace Present.Wrap
 {
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
     using McMaster.Extensions.CommandLineUtils;
     using Present.CodeGeneration.Contracts;
 
     /// <summary>
     /// Holds options specific for the Wrap program.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class WrapOptions : IWrapOptions
     {
         /// <summary>

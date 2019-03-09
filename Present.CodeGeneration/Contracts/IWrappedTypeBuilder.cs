@@ -2,16 +2,18 @@
 // Present.NET is licensed under the MIT License. For usage and redistribution terms please refer to the LICENSE file.
 // For more information about the Present.NET project visit https://github.com/ImAMightyPirate/Present.
 
-namespace Present.CodeGeneration.Constants
+namespace Present.CodeGeneration.Contracts
 {
     /// <summary>
-    /// Comment constants.
+    /// Contract for the wrapped type builder.
     /// </summary>
-    public static class Comment
+    public interface IWrappedTypeBuilder
     {
         /// <summary>
-        /// The single line prefix.
+        /// Creates a wrapper class for a .NET type and outputs
+        /// the code file.
         /// </summary>
-        public const string SingleLinePrefix = "//";
+        /// <param name="options">The program options.</param>
+        void Wrap(IWrapOptions options);
     }
 }

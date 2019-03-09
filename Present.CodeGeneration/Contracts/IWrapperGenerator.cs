@@ -6,7 +6,7 @@ namespace Present.CodeGeneration.Contracts
 {
     using System.Collections.Generic;
     using System.Reflection;
-    using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using Present.CodeGeneration.Wrappers.Custom;
 
     /// <summary>
     /// Contract for the wrapper generator.
@@ -21,7 +21,7 @@ namespace Present.CodeGeneration.Contracts
         /// <param name="typeName">The name of the type.</param>
         /// <param name="methods">The methods to be wrapped.</param>
         /// <returns>The generated namespace declaration.</returns>
-        NamespaceDeclarationSyntax Generate(
+        INamespaceDeclarationSyntaxWrapper Generate(
             IWrapOptions options,
             string typeNamespace,
             string typeName,

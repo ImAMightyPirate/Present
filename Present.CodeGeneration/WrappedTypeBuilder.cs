@@ -4,37 +4,41 @@
 
 namespace Present.CodeGeneration
 {
-    using System;
     using System.Collections.Generic;
     using System.Reflection;
     using EnsureThat;
     using Ninject.Extensions.Logging;
     using Present.CodeGeneration.Contracts;
+    using Present.CodeGeneration.Wrappers.Custom;
 
     /// <summary>
-    /// Class responsible from wrapping a type.
+    /// Class responsible from building a wrapped type.
     /// </summary>
-    public class TypeWrapper : ITypeWrapper
+    public class WrappedTypeBuilder : IWrappedTypeBuilder
     {
         private readonly ILogger logger;
+        private readonly IType type;
         private readonly IMethodAnalyser methodAnalyser;
         private readonly IWrapperGenerator wrapperGenerator;
         private readonly ICodeFileWriter codeFileWriter;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TypeWrapper"/> class.
+        /// Initializes a new instance of the <see cref="WrappedTypeBuilder"/> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
+        /// <param name="type">Wrapper for <see cref="System.Type"/>.</param>
         /// <param name="methodAnalyser">The method analyser.</param>
         /// <param name="wrapperGenerator">The wrapper generator.</param>
         /// <param name="codeFileWriter">The code file writer.</param>
-        public TypeWrapper(
+        public WrappedTypeBuilder(
             ILogger logger,
+            IType type,
             IMethodAnalyser methodAnalyser,
             IWrapperGenerator wrapperGenerator,
             ICodeFileWriter codeFileWriter)
         {
             this.logger = logger;
+            this.type = type;
             this.methodAnalyser = methodAnalyser;
             this.wrapperGenerator = wrapperGenerator;
             this.codeFileWriter = codeFileWriter;
@@ -53,21 +57,21 @@ namespace Present.CodeGeneration
 
             foreach (var assemblyQualifiedTypeName in options.AssemblyQualifiedTypeNames)
             {
-                var type = Type.GetType(assemblyQualifiedTypeName);
+                var resolvedType = this.type.GetType(assemblyQualifiedTypeName);
 
-                if (type == null)
+                if (resolvedType == null)
                 {
-                    this.logger.Fatal($"Type not found for assembly qualified name '{options.OutputPath}'");
-                    return;
+                    this.logger.Error($"Type not found for assembly qualified name '{assemblyQualifiedTypeName}'. Wrapper cannot be generated.");
+                    continue;
                 }
 
                 var supportedMethods = new List<MethodInfo>();
 
                 var totalMethodCount = 0;
 
-                foreach (var method in type.GetMethods())
+                foreach (var method in resolvedType.GetMethods())
                 {
-                    if (this.methodAnalyser.IsWrappingSupported(method))
+                    if (this.methodAnalyser.CanWrap(new MethodInfoWrapper(method)))
                     {
                         supportedMethods.Add(method);
                     }
@@ -75,17 +79,25 @@ namespace Present.CodeGeneration
                     totalMethodCount++;
                 }
 
+                if (supportedMethods.Count == 0)
+                {
+                    this.logger.Error(
+                        $"No wrapper generated for type '{resolvedType.Name}' as no methods are supported.");
+
+                    continue;
+                }
+
                 this.logger.Debug(
-                    $"{supportedMethods.Count} of {totalMethodCount} methods for type '{type}.Name' are supported.");
+                    $"{supportedMethods.Count} of {totalMethodCount} methods for type '{resolvedType.Name}' are supported.");
 
                 var namespaceDeclaration = this.wrapperGenerator.Generate(
                     options,
-                    type.Namespace,
-                    type.Name,
+                    resolvedType.Namespace,
+                    resolvedType.Name,
                     supportedMethods);
 
                 this.codeFileWriter.WriteCodeFileToPath(
-                    type.Name,
+                    resolvedType.Name,
                     namespaceDeclaration,
                     options.OutputPath);
             }

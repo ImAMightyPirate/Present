@@ -4,11 +4,10 @@
 
 namespace Present.CodeGeneration
 {
-    using System;
-    using System.Reflection;
     using EnsureThat;
     using Ninject.Extensions.Logging;
     using Present.CodeGeneration.Contracts;
+    using Present.CodeGeneration.Wrappers.Custom;
 
     /// <summary>
     /// Class responsible for determining whether a method can have a wrapper automatically
@@ -17,14 +16,19 @@ namespace Present.CodeGeneration
     public class MethodAnalyser : IMethodAnalyser
     {
         private readonly ILogger logger;
+        private readonly ITypeAnalyser typeAnalyser;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MethodAnalyser"/> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
-        public MethodAnalyser(ILogger logger)
+        /// <param name="typeAnalyser">The type analyser.</param>
+        public MethodAnalyser(
+            ILogger logger,
+            ITypeAnalyser typeAnalyser)
         {
             this.logger = logger;
+            this.typeAnalyser = typeAnalyser;
         }
 
         /// <summary>
@@ -33,7 +37,7 @@ namespace Present.CodeGeneration
         /// </summary>
         /// <param name="method">The method to analyse.</param>
         /// <returns>Returns true when the method can be wrapped automatially, otherwise false.</returns>
-        public bool IsWrappingSupported(MethodInfo method)
+        public bool CanWrap(IMethodInfoWrapper method)
         {
             Ensure.That(method).IsNotNull();
 
@@ -53,7 +57,7 @@ namespace Present.CodeGeneration
             }
 
             // Return type must be a supported type
-            if (!this.IsSupportedType(method.ReturnType))
+            if (!this.typeAnalyser.CanWrap(method.ReturnType))
             {
                 this.logger.Debug($"Method '{method.Name}' return type is unsupported ('{method.ReturnType.Name}')");
                 return false;
@@ -65,7 +69,7 @@ namespace Present.CodeGeneration
 
             foreach (var parameter in parameters)
             {
-                if (!this.IsSupportedType(parameter.ParameterType))
+                if (!this.typeAnalyser.CanWrap(parameter.ParameterType))
                 {
                     this.logger.Debug($"Method '{method.Name}' parameter '{parameter.Name}' has unsupported type ('{parameter.ParameterType.Name}')");
                     return false;
@@ -74,31 +78,6 @@ namespace Present.CodeGeneration
 
             // Types are not simple enough for us to be able to easily wrap
             return true;
-        }
-
-        private bool IsSupportedType(Type type)
-        {
-            // If an array then check the type of the element
-            if (type.IsArray)
-            {
-                return this.IsSupportedType(type.GetElementType());
-            }
-
-            // Common reference types that cause no difficulties with mocking are supported
-            if (type == typeof(string))
-            {
-                return true;
-            }
-
-            // Structures passed by reference (ref struct), such as Span<T>, are not supported
-            // even though they are value types
-            if (type.IsByRefLike)
-            {
-                return false;
-            }
-
-            // Any remaining value types are supported (which also includes the void return type)
-            return type.IsValueType;
         }
     }
 }

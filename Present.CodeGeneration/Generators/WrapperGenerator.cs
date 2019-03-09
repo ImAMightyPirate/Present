@@ -14,6 +14,7 @@ namespace Present.CodeGeneration.Generators
     using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Present.CodeGeneration.Constants;
     using Present.CodeGeneration.Contracts;
+    using Present.CodeGeneration.Wrappers.Custom;
 
     /// <summary>
     /// Responsible for generating the complete Royslyn definition for a wrapper.
@@ -56,7 +57,7 @@ namespace Present.CodeGeneration.Generators
         /// <param name="typeName">The name of the type.</param>
         /// <param name="methods">The methods to be wrapped.</param>
         /// <returns>The generated namespace declaration.</returns>
-        public NamespaceDeclarationSyntax Generate(
+        public INamespaceDeclarationSyntaxWrapper Generate(
             IWrapOptions options,
             string typeNamespace,
             string typeName,
@@ -117,7 +118,7 @@ namespace Present.CodeGeneration.Generators
             // Add the class to the namespace
             namespaceDeclaration = namespaceDeclaration.AddMembers(classDeclaration);
 
-            return namespaceDeclaration;
+            return new NamespaceDeclarationSyntaxWrapper(namespaceDeclaration);
         }
 
         private AttributeSyntax[] CreateAttributes(

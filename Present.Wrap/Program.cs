@@ -44,8 +44,8 @@ namespace Present.Wrap
             kernel.Bind(k => { k.FromAssembliesMatching("*.dll").SelectAllClasses().BindAllInterfaces(); });
 
             // Perform the wrapping
-            var typeWrapper = kernel.Get<ITypeWrapper>();
-            typeWrapper.Wrap(this);
+            var wrappedTypeBuilder = kernel.Get<IWrappedTypeBuilder>();
+            wrappedTypeBuilder.Wrap(this);
         }
 
         /// <summary>
