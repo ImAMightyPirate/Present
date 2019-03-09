@@ -10,8 +10,8 @@ namespace Present.CodeGeneration.Constants
     public static class Comment
     {
         /// <summary>
-        /// The single line documentation prefix.
+        /// The single line prefix.
         /// </summary>
-        public const string SingleLineDocumentationPrefix = "///";
+        public const string SingleLinePrefix = "//";
     }
 }

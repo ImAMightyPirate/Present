@@ -69,7 +69,7 @@ namespace Present.CodeGeneration.Generators
         private SyntaxToken GetDocumentationCommentToken(string commentText)
         {
             return SyntaxFactory.XmlTextLiteral(
-                SyntaxFactory.TriviaList(SyntaxFactory.DocumentationCommentExterior(Comment.SingleLineDocumentationPrefix)),
+                SyntaxFactory.TriviaList(SyntaxFactory.DocumentationCommentExterior(Comment.SingleLinePrefix)),
                 $" {commentText}",
                 $" {commentText}",
                 SyntaxFactory.TriviaList());

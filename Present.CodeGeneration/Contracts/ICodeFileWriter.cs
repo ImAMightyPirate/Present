@@ -4,7 +4,7 @@
 
 namespace Present.CodeGeneration.Contracts
 {
-    using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using Present.CodeGeneration.Wrappers.Custom;
 
     /// <summary>
     /// Contract for the code file writer.
@@ -19,7 +19,7 @@ namespace Present.CodeGeneration.Contracts
         /// <param name="outputPath">The output path for the file.</param>
         void WriteCodeFileToPath(
             string typeName,
-            NamespaceDeclarationSyntax namespaceDeclaration,
+            INamespaceDeclarationSyntaxWrapper namespaceDeclaration,
             string outputPath);
     }
 }
