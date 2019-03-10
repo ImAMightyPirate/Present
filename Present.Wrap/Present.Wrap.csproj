@@ -4,6 +4,9 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <Platforms>AnyCPU</Platforms>
+
+    <!-- SonarCloud requires a ProjectGuid (not included by default with .NET Core csproj files) -->
+    <ProjectGuid>{E00BCE0C-CC76-43F3-8D1E-D3E39D6250C8}</ProjectGuid>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
