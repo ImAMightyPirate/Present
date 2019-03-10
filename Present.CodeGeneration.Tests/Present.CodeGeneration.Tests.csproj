@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-
     <IsPackable>false</IsPackable>
-
     <Platforms>AnyCPU</Platforms>
+
+    <!-- SonarCloud requires a ProjectGuid (not included by default with .NET Core csproj files) -->
+    <ProjectGuid>{F33AC247-D918-414C-BB37-658423176159}</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>
