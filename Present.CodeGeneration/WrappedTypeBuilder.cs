@@ -92,8 +92,7 @@ namespace Present.CodeGeneration
 
                 var namespaceDeclaration = this.wrapperGenerator.Generate(
                     options,
-                    resolvedType.Namespace,
-                    resolvedType.Name,
+                    resolvedType,
                     supportedMethods);
 
                 this.codeFileWriter.WriteCodeFileToPath(

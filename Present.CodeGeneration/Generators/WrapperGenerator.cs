@@ -53,23 +53,20 @@ namespace Present.CodeGeneration.Generators
         /// Generates a Roslyn namespace definition from a type and its methods.
         /// </summary>
         /// <param name="options">The program options.</param>
-        /// <param name="typeNamespace">The namespace which the type belongs to.</param>
-        /// <param name="typeName">The name of the type.</param>
+        /// <param name="type">The type being wrapped.</param>
         /// <param name="methods">The methods to be wrapped.</param>
         /// <returns>The generated namespace declaration.</returns>
         public INamespaceDeclarationSyntaxWrapper Generate(
             IWrapOptions options,
-            string typeNamespace,
-            string typeName,
+            System.Type type,
             IEnumerable<MethodInfo> methods)
         {
             Ensure.That(options).IsNotNull();
-            Ensure.That(typeNamespace).IsNotNullOrWhiteSpace();
-            Ensure.That(typeName).IsNotNullOrWhiteSpace();
+            Ensure.That(type).IsNotNull();
             Ensure.That(methods).IsNotNull();
 
             // Add a prefix to create an interface name from the type name
-            var interfaceName = $"{Interface.DefaultPrefix}{typeName}";
+            var interfaceName = $"{Interface.DefaultPrefix}{type.Name}";
 
             var attributes = this.CreateAttributes(
                 options,
@@ -86,7 +83,7 @@ namespace Present.CodeGeneration.Generators
                 modifiers);
 
             var classDeclaration = this.classCodeGenerator.Generate(
-                typeName,
+                type.Name,
                 attributes,
                 modifiers,
                 interfaceName);
@@ -110,7 +107,9 @@ namespace Present.CodeGeneration.Generators
                 classDeclaration = classDeclaration.AddMembers(classMethodDeclaration);
             }
 
-            var namespaceDeclaration = this.namespaceCodeGenerator.Generate(typeNamespace);
+            var namespaceDeclaration = this.namespaceCodeGenerator.Generate(
+                type.Namespace,
+                type.AssemblyQualifiedName);
 
             // Add the interface to the namespace
             namespaceDeclaration = namespaceDeclaration.AddMembers(interfaceDeclaration);

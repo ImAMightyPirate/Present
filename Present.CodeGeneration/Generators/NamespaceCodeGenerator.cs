@@ -15,28 +15,32 @@ namespace Present.CodeGeneration.Generators
     /// </summary>
     public class NamespaceCodeGenerator : INamespaceCodeGenerator
     {
-        private readonly ICopyrightXmlGenerator copyrightXmlGenerator;
+        private readonly IXmlHeaderGenerator xmlHeaderGenerator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NamespaceCodeGenerator"/> class.
         /// </summary>
-        /// <param name="copyrightXmlGenerator">The copyright XML generator.</param>
+        /// <param name="xmlHeaderGenerator">The XML header generator.</param>
         public NamespaceCodeGenerator(
-            ICopyrightXmlGenerator copyrightXmlGenerator)
+            IXmlHeaderGenerator xmlHeaderGenerator)
         {
-            this.copyrightXmlGenerator = copyrightXmlGenerator;
+            this.xmlHeaderGenerator = xmlHeaderGenerator;
         }
 
         /// <summary>
         /// Generates a Roslyn namespace definition.
         /// </summary>
         /// <param name="typeNamespace">The namespace which the type belongs to.</param>
+        /// <param name="assemblyQualifiedName">The assembly qualified name of the type being wrapped.</param>
         /// <returns>The generated namespace declaration.</returns>
-        public NamespaceDeclarationSyntax Generate(string typeNamespace)
+        public NamespaceDeclarationSyntax Generate(
+            string typeNamespace,
+            string assemblyQualifiedName)
         {
             Ensure.That(typeNamespace).IsNotNullOrWhiteSpace();
+            Ensure.That(assemblyQualifiedName).IsNotNullOrWhiteSpace();
 
-            var documentationCommentTrivia = this.copyrightXmlGenerator.Generate();
+            var documentationCommentTrivia = this.xmlHeaderGenerator.Generate(assemblyQualifiedName);
 
             // The documentation comment trivia must be wrapped into a token
             var token = SyntaxFactory.Token(

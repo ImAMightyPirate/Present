@@ -5,6 +5,7 @@
 namespace Present.CodeGeneration
 {
     using System;
+    using System.IO;
     using System.Text;
     using EnsureThat;
     using Present.CodeGeneration.Contracts;
@@ -34,7 +35,8 @@ namespace Present.CodeGeneration
             // Common reference types that cause no difficulties with mocking are supported
             if (type.IsOf(typeof(string))
                 || type.IsOf(typeof(Type))
-                || type.IsOf(typeof(Encoding)))
+                || type.IsOf(typeof(Encoding))
+                || type.IsOf(typeof(DirectoryInfo)))
             {
                 return true;
             }

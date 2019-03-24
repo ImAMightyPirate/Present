@@ -7,14 +7,15 @@ namespace Present.CodeGeneration.Contracts
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
     /// <summary>
-    /// Contract for the copyright XML generator.
+    /// Contract for the XML header generator.
     /// </summary>
-    public interface ICopyrightXmlGenerator
+    public interface IXmlHeaderGenerator
     {
         /// <summary>
-        /// Generates a Roslyn comment trivia for the XML copyright header.
+        /// Generates a Roslyn comment trivia for the XML header.
         /// </summary>
-        /// <returns>The generated XML copyright header.</returns>
-        DocumentationCommentTriviaSyntax Generate();
+        /// <param name="assemblyQualifiedName">The assembly qualified name of the type being wrapped.</param>
+        /// <returns>The generated XML header.</returns>
+        DocumentationCommentTriviaSyntax Generate(string assemblyQualifiedName);
     }
 }

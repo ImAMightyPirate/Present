@@ -120,6 +120,9 @@
   <data name="AutoGenerationDisclaimer" xml:space="preserve">
     <value>This file was automatically generated with ♥ by Present.NET.</value>
   </data>
+  <data name="Framework" xml:space="preserve">
+    <value>Framework</value>
+  </data>
   <data name="LicenceDeclaration" xml:space="preserve">
     <value>Present.NET is licensed under the MIT License. For usage and redistribution terms please refer to the LICENSE file.</value>
   </data>
@@ -128,5 +131,8 @@
   </data>
   <data name="ProjectWebsite" xml:space="preserve">
     <value>For more information about the Present.NET project visit https://github.com/ImAMightyPirate/Present.</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
   </data>
 </root>

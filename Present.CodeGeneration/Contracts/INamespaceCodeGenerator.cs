@@ -15,7 +15,10 @@ namespace Present.CodeGeneration.Contracts
         /// Generates a Roslyn namespace definition.
         /// </summary>
         /// <param name="typeNamespace">The namespace which the type belongs to.</param>
+        /// <param name="assemblyQualifiedName">The assembly qualified name of the type being wrapped.</param>
         /// <returns>The generated namespace declaration.</returns>
-        NamespaceDeclarationSyntax Generate(string typeNamespace);
+        NamespaceDeclarationSyntax Generate(
+            string typeNamespace,
+            string assemblyQualifiedName);
     }
 }

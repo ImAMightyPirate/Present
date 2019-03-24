@@ -189,8 +189,8 @@ namespace Present.CodeGeneration.Tests
                 var supportedMethodsCount = 0;
 
                 this.wrapperGeneratorMock
-                    .Setup(g => g.Generate(It.IsAny<IWrapOptions>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<IEnumerable<MethodInfo>>()))
-                    .Callback<IWrapOptions, string, string, IEnumerable<MethodInfo>>((verifyOptions, verifyTypeNamespace, verifyTypeName, verifyMethods) =>
+                    .Setup(g => g.Generate(It.IsAny<IWrapOptions>(), It.IsAny<Type>(), It.IsAny<IEnumerable<MethodInfo>>()))
+                    .Callback<IWrapOptions, Type, IEnumerable<MethodInfo>>((verifyOptions, verifyType, verifyMethods) =>
                     {
                         supportedMethodsCount = verifyMethods.Count();
                     });
@@ -222,8 +222,8 @@ namespace Present.CodeGeneration.Tests
                 var supportedMethodsCount = 0;
 
                 this.wrapperGeneratorMock
-                    .Setup(g => g.Generate(It.IsAny<IWrapOptions>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<IEnumerable<MethodInfo>>()))
-                    .Callback<IWrapOptions, string, string, IEnumerable<MethodInfo>>((verifyOptions, verifyTypeNamespace, verifyTypeName, verifyMethods) =>
+                    .Setup(g => g.Generate(It.IsAny<IWrapOptions>(), It.IsAny<Type>(), It.IsAny<IEnumerable<MethodInfo>>()))
+                    .Callback<IWrapOptions, Type, IEnumerable<MethodInfo>>((verifyOptions, verifyType, verifyMethods) =>
                     {
                         supportedMethodsCount = verifyMethods.Count();
                     });
