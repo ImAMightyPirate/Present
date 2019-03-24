@@ -4,7 +4,7 @@
 
 namespace Present.CodeGeneration.Contracts
 {
-    using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using Microsoft.CodeAnalysis;
 
     /// <summary>
     /// Contract for the XML header generator.
@@ -16,6 +16,6 @@ namespace Present.CodeGeneration.Contracts
         /// </summary>
         /// <param name="assemblyQualifiedName">The assembly qualified name of the type being wrapped.</param>
         /// <returns>The generated XML header.</returns>
-        DocumentationCommentTriviaSyntax Generate(string assemblyQualifiedName);
+        SyntaxTriviaList Generate(string assemblyQualifiedName);
     }
 }

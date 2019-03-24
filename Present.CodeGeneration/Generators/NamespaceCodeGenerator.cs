@@ -40,11 +40,11 @@ namespace Present.CodeGeneration.Generators
             Ensure.That(typeNamespace).IsNotNullOrWhiteSpace();
             Ensure.That(assemblyQualifiedName).IsNotNullOrWhiteSpace();
 
-            var documentationCommentTrivia = this.xmlHeaderGenerator.Generate(assemblyQualifiedName);
+            var xmlHeaderTriviaList = this.xmlHeaderGenerator.Generate(assemblyQualifiedName);
 
-            // The documentation comment trivia must be wrapped into a token
+            // The trivia list must be wrapped into a token
             var token = SyntaxFactory.Token(
-                SyntaxFactory.TriviaList(SyntaxFactory.Trivia(documentationCommentTrivia)),
+                xmlHeaderTriviaList,
                 SyntaxKind.NamespaceKeyword,
                 SyntaxFactory.TriviaList());
 
