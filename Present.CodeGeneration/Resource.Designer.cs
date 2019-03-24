@@ -70,6 +70,15 @@ namespace Present.CodeGeneration {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Framework.
+        /// </summary>
+        internal static string Framework {
+            get {
+                return ResourceManager.GetString("Framework", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Present.NET is licensed under the MIT License. For usage and redistribution terms please refer to the LICENSE file..
         /// </summary>
         internal static string LicenceDeclaration {
@@ -93,6 +102,15 @@ namespace Present.CodeGeneration {
         internal static string ProjectWebsite {
             get {
                 return ResourceManager.GetString("ProjectWebsite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        internal static string Type {
+            get {
+                return ResourceManager.GetString("Type", resourceCulture);
             }
         }
     }

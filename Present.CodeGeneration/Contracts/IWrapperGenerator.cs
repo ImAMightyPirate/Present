@@ -17,14 +17,12 @@ namespace Present.CodeGeneration.Contracts
         /// Generates a Roslyn namespace definition from a type and its methods.
         /// </summary>
         /// <param name="options">The program options.</param>
-        /// <param name="typeNamespace">The namespace which the type belongs to.</param>
-        /// <param name="typeName">The name of the type.</param>
+        /// <param name="type">The type being wrapped.</param>
         /// <param name="methods">The methods to be wrapped.</param>
         /// <returns>The generated namespace declaration.</returns>
         INamespaceDeclarationSyntaxWrapper Generate(
             IWrapOptions options,
-            string typeNamespace,
-            string typeName,
+            System.Type type,
             IEnumerable<MethodInfo> methods);
     }
 }

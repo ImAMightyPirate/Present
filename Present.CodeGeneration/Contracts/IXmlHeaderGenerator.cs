@@ -4,21 +4,18 @@
 
 namespace Present.CodeGeneration.Contracts
 {
-    using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using Microsoft.CodeAnalysis;
 
     /// <summary>
-    /// Contract for the namespace generator.
+    /// Contract for the XML header generator.
     /// </summary>
-    public interface INamespaceCodeGenerator
+    public interface IXmlHeaderGenerator
     {
         /// <summary>
-        /// Generates a Roslyn namespace definition.
+        /// Generates a Roslyn comment trivia for the XML header.
         /// </summary>
-        /// <param name="typeNamespace">The namespace which the type belongs to.</param>
         /// <param name="assemblyQualifiedName">The assembly qualified name of the type being wrapped.</param>
-        /// <returns>The generated namespace declaration.</returns>
-        NamespaceDeclarationSyntax Generate(
-            string typeNamespace,
-            string assemblyQualifiedName);
+        /// <returns>The generated XML header.</returns>
+        SyntaxTriviaList Generate(string assemblyQualifiedName);
     }
 }
