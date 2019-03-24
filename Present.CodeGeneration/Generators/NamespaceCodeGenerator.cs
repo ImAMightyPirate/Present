@@ -48,14 +48,20 @@ namespace Present.CodeGeneration.Generators
                 SyntaxKind.NamespaceKeyword,
                 SyntaxFactory.TriviaList());
 
-            // Substitute the System namespace with a Present equivelant
-            var namespaceName = SyntaxFactory.ParseName(typeNamespace.Replace(Namespace.System, Namespace.Present));
+            var namespaceName = SyntaxFactory.ParseName(this.GetNamespace(typeNamespace));
 
             var namespaceDeclaration = SyntaxFactory
                 .NamespaceDeclaration(namespaceName)
                 .WithNamespaceKeyword(token);
 
             return namespaceDeclaration;
+        }
+
+        private string GetNamespace(string typeNamespace)
+        {
+            return typeNamespace.StartsWith(Namespace.System)
+                ? typeNamespace.Replace(Namespace.System, Namespace.Present)
+                : typeNamespace;
         }
     }
 }
