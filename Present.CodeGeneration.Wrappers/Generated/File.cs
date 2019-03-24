@@ -1,8 +1,11 @@
-﻿// <copyright>
-// This file was automatically generated with ♥ by Present.NET.
-// For more information about the Present.NET project visit https://github.com/ImAMightyPirate/Present.
-// Present.NET is licensed under the MIT License. For usage and redistribution terms please refer to the LICENSE file.
-// </copyright>
+﻿/// <copyright>
+/// This file was automatically generated with ♥ by Present.NET.
+/// For more information about the Present.NET project visit https://github.com/ImAMightyPirate/Present.
+/// Present.NET is licensed under the MIT License. For usage and redistribution terms please refer to the LICENSE file.
+/// 
+/// Type: System.IO.File, System.IO.FileSystem, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
+/// Framework: .NETCoreApp,Version=v2.1
+/// </copyright>
 
 namespace Present.IO
 {

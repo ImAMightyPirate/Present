@@ -28,6 +28,7 @@ namespace Present.CodeGeneration.Tests
         private CodeFileWriter sut;
 
         private Mock<ILogger> loggerMock;
+        private Mock<IDirectory> directoryMock;
         private Mock<IFile> fileMock;
         private Mock<IPath> pathMock;
 
@@ -38,11 +39,13 @@ namespace Present.CodeGeneration.Tests
         public void Setup()
         {
             this.loggerMock = new Mock<ILogger>();
+            this.directoryMock = new Mock<IDirectory>();
             this.fileMock = new Mock<IFile>();
             this.pathMock = new Mock<IPath>();
 
             this.sut = new CodeFileWriter(
                 this.loggerMock.Object,
+                this.directoryMock.Object,
                 this.fileMock.Object,
                 this.pathMock.Object);
         }
@@ -96,6 +99,50 @@ namespace Present.CodeGeneration.Tests
                     TypeName,
                     new Mock<INamespaceDeclarationSyntaxWrapper>().Object,
                     outputPath));
+            }
+
+            /// <summary>
+            /// When the output path does not already exist then the directory should be created.
+            /// </summary>
+            [Test]
+            public void WhenOutputPathDoesNotAlreadyExistThenDirectoryShouldBeCreated()
+            {
+                // Arrange
+                this.directoryMock
+                    .Setup(d => d.Exists(It.IsAny<string>()))
+                    .Returns(false);
+
+                // Act
+                this.sut.WriteCodeFileToPath(
+                    TypeName,
+                    new Mock<INamespaceDeclarationSyntaxWrapper>().Object,
+                    OutputPath);
+
+                // Assert
+                this.directoryMock
+                    .Verify(d => d.CreateDirectory(OutputPath));
+            }
+
+            /// <summary>
+            /// When the output path already exists then the directory should not be created.
+            /// </summary>
+            [Test]
+            public void WhenOutputPathAlreadyExistsThenDirectoryShouldNotBeCreated()
+            {
+                // Arrange
+                this.directoryMock
+                    .Setup(d => d.Exists(It.IsAny<string>()))
+                    .Returns(true);
+
+                // Act
+                this.sut.WriteCodeFileToPath(
+                    TypeName,
+                    new Mock<INamespaceDeclarationSyntaxWrapper>().Object,
+                    OutputPath);
+
+                // Assert
+                this.directoryMock
+                    .Verify(d => d.CreateDirectory(OutputPath), Times.Never);
             }
 
             /// <summary>

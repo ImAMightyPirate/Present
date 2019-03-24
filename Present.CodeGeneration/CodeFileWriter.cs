@@ -18,6 +18,7 @@ namespace Present.CodeGeneration
     public class CodeFileWriter : ICodeFileWriter
     {
         private readonly ILogger logger;
+        private readonly IDirectory directory;
         private readonly IFile file;
         private readonly IPath path;
 
@@ -25,14 +26,17 @@ namespace Present.CodeGeneration
         /// Initializes a new instance of the <see cref="CodeFileWriter"/> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
+        /// <param name="directory">Wrapper for <see cref="System.IO.Directory"/>.</param>
         /// <param name="file">Wrapper for <see cref="System.IO.File"/>.</param>
         /// <param name="path">Wrapper for <see cref="System.IO.Path"/>.</param>
         public CodeFileWriter(
             ILogger logger,
+            IDirectory directory,
             IFile file,
             IPath path)
         {
             this.logger = logger;
+            this.directory = directory;
             this.file = file;
             this.path = path;
         }
@@ -59,6 +63,12 @@ namespace Present.CodeGeneration
             var filePath = this.path.Combine(outputPath, fileName);
 
             this.logger.Debug($"Writing code file to path '{filePath}'");
+
+            // Create the output directory if it does not already exist
+            if (!this.directory.Exists(outputPath))
+            {
+                this.directory.CreateDirectory(outputPath);
+            }
 
             this.file.WriteAllText(filePath, generatedCode, Encoding.UTF8);
         }
