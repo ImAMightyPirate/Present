@@ -58,10 +58,10 @@ namespace Present.CodeGeneration.Tests.Generators
             }
 
             /// <summary>
-            /// When the attributes argument is invalid then a <see cref="ArgumentNullException"/> should be thrown.
+            /// When the attributes argument is null then a <see cref="ArgumentNullException"/> should be thrown.
             /// </summary>
             [Test]
-            public void WhenAttributesArgumentIsInvalidThenArgumentExceptionShouldBeThrown()
+            public void WhenAttributesArgumentIsNullThenArgumentNullExceptionShouldBeThrown()
             {
                 // Act + Assert
                 Should.Throw<ArgumentNullException>(() => this.sut.Generate(
@@ -71,10 +71,10 @@ namespace Present.CodeGeneration.Tests.Generators
             }
 
             /// <summary>
-            /// When the modifiers argument is invalid then a <see cref="ArgumentNullException"/> should be thrown.
+            /// When the modifiers argument is null then a <see cref="ArgumentNullException"/> should be thrown.
             /// </summary>
             [Test]
-            public void WhenModifiersArgumentIsInvalidThenArgumentExceptionShouldBeThrown()
+            public void WhenModifiersArgumentIsNullThenArgumentNullExceptionShouldBeThrown()
             {
                 // Act + Assert
                 Should.Throw<ArgumentNullException>(() => this.sut.Generate(
