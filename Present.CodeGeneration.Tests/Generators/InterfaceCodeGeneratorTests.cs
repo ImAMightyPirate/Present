@@ -20,7 +20,6 @@ namespace Present.CodeGeneration.Tests.Generators
     {
         private const string InterfaceName = "Interface";
         private const string PublicModifier = "public";
-        private const string PrivateModifier = "private";
 
         private InterfaceCodeGenerator sut;
 
@@ -67,10 +66,10 @@ namespace Present.CodeGeneration.Tests.Generators
             }
 
             /// <summary>
-            /// When the interface is generated then the interface name should be returned.
+            /// When the interface is generated then the interface name should be used.
             /// </summary>
             [Test]
-            public void WhenInterfaceIsGeneratedThenInterfaceNameShouldBeReturned()
+            public void WhenInterfaceIsGeneratedThenInterfaceNameShouldBeUsed()
             {
                 // Act
                 var result = this.sut.Generate(InterfaceName, new SyntaxToken[0]);
@@ -80,21 +79,16 @@ namespace Present.CodeGeneration.Tests.Generators
             }
 
             /// <summary>
-            /// When the interface is generated then the modifiers should be returned.
+            /// When a modifier is supplied then the interface declaration should include the modifier.
             /// </summary>
-            /// <param name="modifierSyntaxKind">The syntax kind for the modifier.</param>
-            /// <param name="expectedDeclarationString">The string expected in the interface declaration.</param>
-            [TestCase(SyntaxKind.PublicKeyword, PublicModifier)]
-            [TestCase(SyntaxKind.PrivateKeyword, PrivateModifier)]
-            public void WhenInterfaceIsGeneratedThenModifiersShouldBeReturned(
-                SyntaxKind modifierSyntaxKind,
-                string expectedDeclarationString)
+            [Test]
+            public void WhenModifierIsSuppliedThenInterfaceDeclarationShouldIncludeModifier()
             {
                 // Act
-                var result = this.sut.Generate(InterfaceName, new[] { SyntaxFactory.Token(modifierSyntaxKind) });
+                var result = this.sut.Generate(InterfaceName, new[] { SyntaxFactory.Token(SyntaxKind.PublicKeyword) });
 
                 // Assert
-                result.ToString().ShouldContain(expectedDeclarationString);
+                result.ToString().ShouldContain(PublicModifier);
             }
         }
     }

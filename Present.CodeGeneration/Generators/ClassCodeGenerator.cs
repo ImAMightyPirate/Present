@@ -51,7 +51,7 @@ namespace Present.CodeGeneration.Generators
             }
 
             // Have the class implement the interface (if supplied)
-            if (!string.IsNullOrEmpty(interfaceName))
+            if (!string.IsNullOrWhiteSpace(interfaceName))
             {
                 classDeclaration = classDeclaration
                     .AddBaseListTypes(SyntaxFactory.SimpleBaseType(SyntaxFactory.IdentifierName(interfaceName)));
