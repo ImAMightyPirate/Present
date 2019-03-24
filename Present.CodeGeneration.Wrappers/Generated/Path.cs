@@ -2,7 +2,6 @@
 /// This file was automatically generated with ♥ by Present.NET.
 /// For more information about the Present.NET project visit https://github.com/ImAMightyPirate/Present.
 /// Present.NET is licensed under the MIT License. For usage and redistribution terms please refer to the LICENSE file.
-/// 
 /// Type: System.IO.Path, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e
 /// Framework: .NETCoreApp,Version=v2.1
 /// </copyright>
